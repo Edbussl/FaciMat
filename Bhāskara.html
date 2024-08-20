@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Bhaskara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Bhaskara</h2>
+        <input type="number" id="a" placeholder="Coeficiente a" step="any">
+        <input type="number" id="b" placeholder="Coeficiente b" step="any">
+        <input type="number" id="c" placeholder="Coeficiente c" step="any">
+        <button onclick="calcularBhaskara()">Calcular</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calcularBhaskara() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                document.getElementById('result').innerText = 'Por favor, insira valores válidos.';
+                return;
+            }
+
+            const delta = b * b - 4 * a * c;
+            let resultado = '';
+
+            if (delta > 0) {
+                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                resultado = `As raízes são x1 = ${x1.toFixed(2)} e x2 = ${x2.toFixed(2)}`;
+            } else if (delta === 0) {
+                const x = -b / (2 * a);
+                resultado = `A raiz dupla é x = ${x.toFixed(2)}`;
+            } else {
+                resultado = 'Não há raízes reais.';
+            }
+
+            document.getElementById('result').innerText = resultado;
+        }
+    </script>
+</body>
+</html>
