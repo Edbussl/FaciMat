@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/022/877/545/original/3d-icon-alien-monster-free-png.png" type="image/png">
+    <title>Matrix Operations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff; /* White */
+            margin: 0;
+            padding: 20px;
+            background: #000000; /* Black */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #333333; /* Dark Gray */
+            padding: 30px;
+            border-radius: 10px;
+            width: 60%; /* Minimum width */
+            max-width: 800px; /* Optional max width */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #dc143c; /* Crimson Red */
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2.5em;
+        }
+        h2, h3 {
+            color: #dc143c; /* Crimson Red */
+            margin-top: 20px;
+            border-bottom: 2px solid #dc143c;
+            padding-bottom: 5px;
+        }
+        label {
+            color: #ffffff; /* White */
+            margin-right: 10px;
+        }
+        input[type='number'] {
+            width: 60px;
+            border-radius: 8px;
+            text-align: center;
+            color: #000000; /* Black */
+            background-color: #cccccc; /* Gray */
+            border: 2px solid #dc143c; /* Crimson Red */
+            padding: 5px;
+            margin: 5px;
+            transition: border-color 0.3s;
+        }
+        input[type='number']:focus {
+            border-color: #ffffff; /* White */
+            outline: none;
+        }
+        table {
+            margin-bottom: 20px;
+            background-color: #444444; /* Slightly lighter Dark Gray */
+            border-radius: 8px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            min-width: 40px;
+            padding: 10px;
+            text-align: center;
+            border: 2px solid #ffffff; /* White */
+            border-radius: 4px;
+        }
+        button {
+            background-color: #dc143c; /* Crimson Red */
+            font-weight: bold;
+            color: #ffffff; /* White */
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin: 10px 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 45%;
+        }
+        button:hover {
+            background-color: #a50024; /* Darker Crimson */
+            transform: scale(1.05);
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #444444; /* Dark Gray */
+            border: 2px solid #dc143c; /* Crimson Red */
+            border-radius: 8px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Operações com Matrizes</h1>
+
+        <h2>Defina as Matrizes:</h2>
+
+        <div>
+            <h3>Matriz A</h3>
+            <label for="rowsA">Linhas:</label>
+            <input type="number" id="rowsA" value="2" min="1" />
+            <label for="colsA">Colunas:</label>
+            <input type="number" id="colsA" value="2" min="1" />
+            <div id="matrixA"></div>
+        </div>
+
+        <div>
+            <h3>Matriz B</h3>
+            <label for="rowsB">Linhas:</label>
+            <input type="number" id="rowsB" value="2" min="1" />
+            <label for="colsB">Colunas:</label>
+            <input type="number" id="colsB" value="2" min="1" />
+            <div id="matrixB"></div>
+        </div>
+
+        <button onclick="generateMatrices()">Gerar Matrizes</button>
+
+        <h2>Resultado</h2>
+        <div id="result"></div>
+
+        <div class="button-container">
+            <button onclick="addMatrices()">Somar</button>
+            <button onclick="multiplyMatrices()">Multiplicar</button>
+        </div>
+
+        <footer>
+            &copy; 2024 Calculadora de Matrizes. Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <script src="matrixOperations.js"></script>
+</body>
+</html>
