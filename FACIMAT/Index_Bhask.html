@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Bhaskara</title>
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="icon" href="./assets/imgs/Escudo_do_Sport_Club_Internacional.svg.png" type="image/png">
+    <link rel="icon" href="./assets/imgs/Escudo Inter.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,65 +13,47 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #e6e6e6;
+            background: url('./assets/imgs/Tapete do Sport Club Internacional.jpg') center / cover no-repeat;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
         }
         .container {
-            background: #ffffff;
+            position: relative;
+            z-index: 2;
+            background: #fff;
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
             border: 2px solid #d71a34;
+            max-width: 450px; /* Aumentei a largura */
+            width: 100%; /* Garante que a largura seja responsiva */
+            text-align: center;
+            box-sizing: border-box; /* Adicionado para incluir padding e border na largura total */
         }
-        h2 {
-            margin-bottom: 20px;
-            color: #d71a34;
-            font-size: 1.5em;
-            font-weight: bold;
-            font-family: 'Arial', sans-serif;
-        }
+        h2 { color: #d71a34; }
         input {
-            margin: 10px 0;
-            padding: 12px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
+            margin: 10px 0; padding: 12px; width: 100%; border: 1px solid #ddd; border-radius: 5px;
+            box-sizing: border-box; /* Adicionado para incluir padding e border na largura total */
         }
-        input:focus {
-            border-color: #d71a34;
-            outline: none;
-            box-shadow: 0 0 5px rgba(215, 26, 52, 0.5);
-        }
+        input:focus { border-color: #d71a34; outline: none; box-shadow: 0 0 5px rgba(215, 26, 52, 0.5); }
         button {
-            padding: 12px;
-            width: 100%;
-            background-color: #d71a34;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 12px; width: 100%; background: #d71a34; color: #fff; border: none; border-radius: 5px; cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
         }
-        button:hover {
-            background-color: #a61426;
-        }
-        button:active {
-            transform: scale(0.98);
-        }
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 1.2em;
-            color: #333;
+        button:hover { background: #a61426; }
+        .result { margin-top: 20px; font-weight: bold; color: #333; }
+        .back-button {
+            position: absolute; top: 20px; left: 20px; font-size: 2em; color: #d71a34; cursor: pointer; z-index: 2;
         }
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
+    <a href="index_Home.html" class="back-button">&#8592;</a>
     <div class="container">
         <h2>Calculadora de Bhaskara</h2>
         <input type="number" id="a" placeholder="Coeficiente a" step="any">
@@ -84,28 +65,17 @@
 
     <script>
         function calcularBhaskara() {
-            const a = parseFloat(document.getElementById('a').value);
-            const b = parseFloat(document.getElementById('b').value);
-            const c = parseFloat(document.getElementById('c').value);
+            const a = +document.getElementById('a').value;
+            const b = +document.getElementById('b').value;
+            const c = +document.getElementById('c').value;
 
             if (isNaN(a) || isNaN(b) || isNaN(c)) {
-                document.getElementById('result').innerText = 'Por favor, insira valores válidos.';
-                return;
+                return document.getElementById('result').innerText = 'Por favor, insira valores válidos.';
             }
 
-            const delta = b * b - 4 * a * c;
-            let resultado = '';
-
-            if (delta > 0) {
-                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
-                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
-                resultado = `As raízes são x1 = ${x1.toFixed(2)} e x2 = ${x2.toFixed(2)}`;
-            } else if (delta === 0) {
-                const x = -b / (2 * a);
-                resultado = `A raiz dupla é x = ${x.toFixed(2)}`;
-            } else {
-                resultado = 'Não há raízes reais.';
-            }
+            const delta = b ** 2 - 4 * a * c;
+            let resultado = delta > 0 ? `As raízes são x1 = ${((-b + Math.sqrt(delta)) / (2 * a)).toFixed(2)} e x2 = ${((-b - Math.sqrt(delta)) / (2 * a)).toFixed(2)}` :
+                          delta === 0 ? `A raiz dupla é x = ${(-b / (2 * a)).toFixed(2)}` : 'Não há raízes reais.';
 
             document.getElementById('result').innerText = resultado;
         }

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/022/877/545/original/3d-icon-alien-monster-free-png.png" type="image/png">
-    <title>Operações com Matrizes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/imgs/Escudo Inter.png" type="image/png">
+    <title>Matrix Operations</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,37 +14,49 @@
             height: 100vh;
             margin: 0;
             background-color: #e6e6e6;
+            position: relative; /* Para o pseudo-elemento ::before */
+            background-image: url('./assets/imgs/Tapete\ do\ Sport\ Club\ Internacional.jpg'); /* Adicione o caminho correto da imagem */
+            background-size: cover; /* Faz com que a imagem cubra toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Não repete a imagem */
         }
+
+        /* Camada semi-transparente sobre a imagem de fundo */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.5); /* Ajuste a opacidade conforme necessário */
+            z-index: 0; /* Coloca a camada abaixo do conteúdo */
+        }
+
         .container {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 600px;
+            max-width: 450px; /* Aumentei a largura */
             text-align: center;
-            border: 2px solid #dc143c; /* Crimson Red */
+            border: 2px solid #d71a34;
+            position: relative; /* Para garantir que o conteúdo fique acima do pseudo-elemento */
+            z-index: 1; /* Coloca o conteúdo acima da camada semi-transparente */
         }
+        
         h1 {
-            margin-bottom: 20px;
-            color: #dc143c; /* Crimson Red */
-            font-size: 2em;
+            color: #d71a34;
         }
         h2 {
             margin-bottom: 20px;
-            color: #dc143c; /* Crimson Red */
+            color: #d71a34;
             font-size: 1.5em;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
         }
-        h3 {
-            margin-top: 20px;
-            color: #dc143c; /* Crimson Red */
-            font-size: 1.2em;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input[type='number'] {
+        input {
             margin: 10px 0;
             padding: 12px;
             width: 100%;
@@ -53,15 +65,15 @@
             border-radius: 5px;
             font-size: 1em;
         }
-        input[type='number']:focus {
-            border-color: #dc143c;
+        input:focus {
+            border-color: #d71a34;
             outline: none;
-            box-shadow: 0 0 5px rgba(220, 20, 60, 0.5);
+            box-shadow: 0 0 5px rgba(215, 26, 52, 0.5);
         }
         button {
             padding: 12px;
             width: 100%;
-            background-color: #dc143c; /* Crimson Red */
+            background-color: #d71a34;
             color: white;
             border: none;
             border-radius: 5px;
@@ -70,37 +82,66 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            background-color: #a50024; /* Darker Crimson */
+            background-color: #a61426;
         }
         button:active {
             transform: scale(0.98);
         }
-        #result {
+        .result {
             margin-top: 20px;
             font-weight: bold;
             font-size: 1.2em;
             color: #333;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border: 1px solid #dc143c; /* Crimson Red */
-            border-radius: 5px;
+        }
+
+        /* Classe adicionada para espaçamento das matrizes */
+        .matrix {
+            margin-top: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .red-divider {
+            width: 100%;
+            height: 5px;
+            background-color: red;
+            margin: 20px 0;
+        }
+
+        /* Estilos para a seta */
+        .back-button {
+            position: absolute; /* Posiciona a seta no canto superior esquerdo */
+            top: 20px; /* Distância do topo */
+            left: 20px; /* Distância da esquerda */
+            font-size: 2em; /* Tamanho da seta */
+            color: #d71a34; /* Cor da seta */
+            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            z-index: 1; /* Garante que a seta fique acima da camada semi-transparente */
         }
     </style>
 </head>
 <body>
+    <a href="index_Home.html" class="back-button">&#8592;</a> <!-- Seta vermelha para voltar -->
     <div class="container">
         <h1>Operações com Matrizes</h1>
-
         <h2>Defina as Matrizes:</h2>
-
         <div>
             <h3>Matriz A</h3>
             <label for="rowsA">Linhas:</label>
             <input type="number" id="rowsA" value="2" min="1" />
             <label for="colsA">Colunas:</label>
             <input type="number" id="colsA" value="2" min="1" />
-            <div id="matrixA"></div>
+            <div id="matrixA" class="matrix"></div>
         </div>
+
+        <!-- Retângulo separador entre Matriz A e Matriz B -->
+        <div class="red-divider"></div>
 
         <div>
             <h3>Matriz B</h3>
@@ -108,20 +149,21 @@
             <input type="number" id="rowsB" value="2" min="1" />
             <label for="colsB">Colunas:</label>
             <input type="number" id="colsB" value="2" min="1" />
-            <div id="matrixB"></div>
+            <div id="matrixB" class="matrix"></div>
         </div>
 
         <button onclick="generateMatrices()">Gerar Matrizes</button>
-
         <h2>Resultado</h2>
         <div id="result"></div>
 
         <div class="button-container">
             <button onclick="addMatrices()">Somar</button>
+            <div class="red-divider"></div> <!-- Div centralizada -->
             <button onclick="multiplyMatrices()">Multiplicar</button>
         </div>
+
     </div>
 
-    <script src="matrixOperations.js"></script>
+    <script src="./assets/js/MatrixOperations.js"></script>
 </body>
 </html>

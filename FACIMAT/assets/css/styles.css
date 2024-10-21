@@ -18,9 +18,14 @@ body {
     text-align: center;
 }
 
+.matrix {
+    margin-top: 20px;
+}
+
+
 h2 {
     margin-bottom: 20px;
-    color: #d71a34; /* Cor vermelha do Internacional */
+    color: #d71a34;
     font-size: 1.5em;
     font-weight: bold;
 }
